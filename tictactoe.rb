@@ -24,11 +24,28 @@ def print_board
   puts
   
 end
-def turn
-  puts "Please you need to write the coordinates"
-  coor = gets.chomp #var that save the coordinate that user choice
-  puts coor
+def player
+  for i in 1..9
+    if i % 2 == 0 
+      puts "player 2"
+      puts "Please you need to write the coordinates"
+      coor = gets.chomp #var that save the coordinate that user choice
+      puts coor
+      player = "Y"
+      turn(coor, player)
+    else
+      puts "player 1"
+      puts "Please you need to write the coordinates"
+      coor = gets.chomp #var that save the coordinate that user choice
+      puts coor
+      player = "X"
+      turn(coor, player)
+    end  
+  end
+end
 
+
+def turn (coor , player)
   coor_hash = {"x1" => @x1,
                "x2" => @x2,
                "x3" => @x3,
@@ -41,19 +58,23 @@ def turn
 
     coor_hash.each do |choice, square|
       if choice == coor
-          square.sub!(" ", "X")
+          square.sub!(" ", player)
       end
 
     end
  print_board
-     puts coor_hash["x1"]
+end
+
+def check_win
+  
 end
 
 def start
   puts "Tic Tac Toe game"
   empty_board
   print_board
-  turn
+  player
+  
 end
 
 start
