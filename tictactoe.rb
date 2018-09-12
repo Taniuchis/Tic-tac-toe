@@ -1,22 +1,30 @@
 
 
 #tictactoe
-def coordinates_empty(coorx, coory)
-  if @board[coorx.to_i][coory.to_i]  != " "
+def coordinates_empty()
+  value = true
+  x = @coorx.to_i
+  y = @coory.to_i
+  if @board[x][y]  != " "
     puts "this place is occupied"
-    varemp = false
+    value = false
   end 
- varemp 
+ value 
 end
 
-def coordinates_valid(coorx, coory)
+def coordinates_valid()
   value = true
+  x = @coorx.to_i
+  y = @coory.to_i
    begin  
-     @board[coorx.to_i][coory.to_i]
+     @board[x][y]
      rescue  
       puts 'Error in the coordinates write others'  
       value = false 
    end  
+   if (value == true)
+    value = coordinates_empty()
+   end 
   value
 end
 
@@ -30,44 +38,38 @@ def player
         puts "player 2"
         puts "Please you need to write the coordinates"
         puts "X : "
-        coorx = gets.chomp #var that save the coordinate that user choice
+        @coorx = gets.chomp #var that save the coordinate that user choice
         puts "Y : "
-        coory = gets.chomp
-        value =  coordinates_valid(coorx, coory)
-        varemp = coordinates_empty(coorx, coory)
-        player = "O"
-        break if value == true or varemp == true
+        @coory = gets.chomp
+        value =  coordinates_valid()
+        break if value == true 
       end
-       
-      #turn(coor, player)
+      player = "O"
+      turn(player)
+    
     else
       loop do 
         puts "player 1"
         puts "Please you need to write the coordinates"
         puts "X : "
-        coorx = gets.chomp #var that save the coordinate that user choice
+        @coorx = gets.chomp #var that save the coordinate that user choice
         puts "Y : "
-        coory = gets.chomp
-        value =  coordinates_valid(coorx, coory)
-        varemp = coordinates_empty(coorx, coory)
-        player = "X"
-        break if value == true or varemp == true
-      end
-        
-      #turn(coor, player)
+        @coory = gets.chomp
+        value =  coordinates_valid()
+        break if value == true 
+      end  
+      player = "X"
+      turn(player)
     end  
   end
 
 end
 
-def turn (coor , player)
-    coor_hash.each do |choice, square|
-      if choice == coor
-          square.sub!(" ", player)
-      end
-
-    end
- print_board
+def turn (player)
+  x = @coorx.to_i
+  y = @coory.to_i
+   @board[x][y] = player
+   print_board
 end
 
 
