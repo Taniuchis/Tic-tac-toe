@@ -1,34 +1,52 @@
 
+
 #tictactoe
-def coordinates
-   
+def coordinates_valid(coorx, coory)
+  value = true
+   begin  
+     @board[coorx.to_i][coory.to_i]
+     rescue  
+      puts 'Error in the coordinates write others'  
+      value = false 
+   end  
+  value
 end
 
 def player
+
   plays = @board_size * @board_size
   for i in 1..plays
     if i % 2 == 0 
-      puts "player 2"
-      puts "Please you need to write the coordinates"
-      coor = gets.chomp #var that save the coordinate that user choice
-      puts coor
-      player = "O"
+      loop do 
+        puts "player 2"
+        puts "Please you need to write the coordinates"
+        puts "X : "
+        coorx = gets.chomp #var that save the coordinate that user choice
+        puts "Y : "
+        coory = gets.chomp
+        value =  coordinates_valid(coorx, coory)
+        player = "O"
+        break if value == true
+      end
+       
       #turn(coor, player)
     else
-      puts "player 1"
-      puts "Please you need to write the coordinates"
-      coor = gets.chomp #var that save the coordinate that user choice
-      player = "X"
+      loop do 
+        puts "player 1"
+        puts "Please you need to write the coordinates"
+        puts "X : "
+        coorx = gets.chomp #var that save the coordinate that user choice
+        puts "Y : "
+        coory = gets.chomp
+        value =  coordinates_valid(coorx, coory)
+        player = "X"
+        break if value == true
+      end
+        
       #turn(coor, player)
     end  
   end
 
-  puts @board[0][0]
-  if coordinates == true
-    puts "existen las cord"
-  else
-    puts "no existen"
-  end
 end
 
 def turn (coor , player)
@@ -78,8 +96,6 @@ def print_board
     puts
     #puts "  --|--|--"
   end
-  
-
 end
 
 
