@@ -1,6 +1,14 @@
 
 
 #tictactoe
+def coordinates_empty(coorx, coory)
+  if @board[coorx.to_i][coory.to_i]  != " "
+    puts "this place is occupied"
+    varemp = false
+  end 
+ varemp 
+end
+
 def coordinates_valid(coorx, coory)
   value = true
    begin  
@@ -11,6 +19,7 @@ def coordinates_valid(coorx, coory)
    end  
   value
 end
+
 
 def player
 
@@ -25,8 +34,9 @@ def player
         puts "Y : "
         coory = gets.chomp
         value =  coordinates_valid(coorx, coory)
+        varemp = coordinates_empty(coorx, coory)
         player = "O"
-        break if value == true
+        break if value == true or varemp == true
       end
        
       #turn(coor, player)
@@ -39,8 +49,9 @@ def player
         puts "Y : "
         coory = gets.chomp
         value =  coordinates_valid(coorx, coory)
+        varemp = coordinates_empty(coorx, coory)
         player = "X"
-        break if value == true
+        break if value == true or varemp == true
       end
         
       #turn(coor, player)
