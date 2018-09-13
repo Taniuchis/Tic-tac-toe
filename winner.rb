@@ -1,26 +1,29 @@
 require_relative 'tictactoe'
 
 class Win < Tictactoe
+	 @@winx = Array.new 
+	 @@winy = Array.new 
+	  def combo_win 
+	      for i in 0..@@board_size-1
+	        @@winx[i] = "X"
+	        @@winy[i] = "O"
+	      end 
+	  end
 
 	  def check_win
-	      winx = Array.new 
-	      winy = Array.new 
-	      for i in 0..@@board_size-1
-	        winx[i] = "X"
-	        winy[i] = "O"
-	      end 
-
+	     combo_win
+         
 	      aux_array = Array.new
 	      for i in 0..@@board_size-1
 	        for j in 0..@@board_size-1
 	          aux_array[j] = @@board[i][j] 
 	        end 
-	        if winx == aux_array
-	          puts "the player 1 is the win"
+	        if @@winx == aux_array
+	          puts "the player 1 is the winner"
 	          exit
 	        end
-	        if winy == aux_array
-	          puts "the player 2 is the win"
+	        if @@winy == aux_array
+	          puts "the player 2 is the winner"
 	          exit
 	        end
 	      end 
@@ -29,12 +32,12 @@ class Win < Tictactoe
 	        for j in 0..@@board_size-1
 	          aux_array[j] = @@board[j][i] 
 	        end 
-	        if winx == aux_array
-	          puts "the player 1 is the win"
+	        if @@winx == aux_array
+	          puts "the player 1 is the winner"
 	          exit
 	        end
-	        if winy == aux_array
-	          puts "the player 2 is the win"
+	        if @@winy == aux_array
+	          puts "the player 2 is the winner"
 	          exit
 	        end
 	      end 
@@ -46,12 +49,12 @@ class Win < Tictactoe
 	          end 
 	        end 
 	      end 
-	      if winx == aux_array
-	        puts "the player 1 is the win"
+	      if @@winx == aux_array
+	        puts "the player 1 is the winner"
 	        exit
 	      end
-	      if winy == aux_array
-	        puts "the player 2 is the win"
+	      if @@winy == aux_array
+	        puts "the player 2 is the winner"
 	        exit
 	      end
 	      
@@ -62,12 +65,12 @@ class Win < Tictactoe
 	          end 
 	        end 
 	      end 
-	      if winx == aux_array
-	        puts "the player 1 is the win"
+	      if @@winx == aux_array
+	        puts "the player 1 is the winner"
 	        exit
 	      end
-	      if winy == aux_array
-	        puts "the player 2 is the win"
+	      if @@winy == aux_array
+	        puts "the player 2 is the winner"
 	        exit
 	      end
     end
