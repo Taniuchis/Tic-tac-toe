@@ -66,6 +66,7 @@ class Tictactoe
           player1.check_win
          
         end  
+
       end
 
     end
@@ -74,6 +75,7 @@ class Tictactoe
       x = @coorx.to_i
       y = @coory.to_i
        @@board[x][y] = player
+       system 'clear' 
        print_board
     end
 
