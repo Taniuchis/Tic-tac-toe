@@ -7,7 +7,7 @@ class Tictactoe
       x = @coorx.to_i
       y = @coory.to_i
       if @@board[x][y]  != " "
-        puts "this place is occupied"
+        puts "Warning::This place is occupied"
         value = false
       end 
      value 
@@ -20,7 +20,7 @@ class Tictactoe
        begin  
          @@board[x][y]
          rescue  
-          puts 'Error in the coordinates write others'  
+          puts 'Warning::Error in the coordinates write others'  
           value = false 
        end  
        if (value == true)
@@ -28,7 +28,11 @@ class Tictactoe
        end 
       value
     end
-
+    def size_valid
+      if @@board_size == 0 
+        puts "Warning::Chooise other size"
+      end 
+    end
 
     def player
 
@@ -131,8 +135,12 @@ class Tictactoe
 
     def start
       puts "Tic Tac Toe game"
-      puts "Choice the size of the board"
-      @@board_size = gets.chomp.to_i
+      loop do 
+        puts "Choice the size of the board"
+        @@board_size = gets.chomp.to_i
+        size_valid
+        break if @@board_size > 0
+      end 
       empty_board
       #check_win
       print_board
