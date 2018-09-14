@@ -1,4 +1,8 @@
 require_relative 'tictactoe'
 require_relative 'winner'
-game = Tictactoe.new
-game.start
+
+	game = Tictactoe.new
+    game.start
+
+
+ 

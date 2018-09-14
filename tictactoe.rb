@@ -116,6 +116,17 @@ class Tictactoe
       end
     end
 
+    def repeat_game
+      puts "Do you want play again? Y/N"
+      answ = gets.chomp.upcase
+      if answ == "Y"
+        start
+      else
+        puts "Game Over"
+        exit
+      end
+    end
+
     def start
       puts "Tic Tac Toe game"
       puts "Choice the size of the board"

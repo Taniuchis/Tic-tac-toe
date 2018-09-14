@@ -20,11 +20,11 @@ class Win < Tictactoe
 	        end 
 	        if @@winx == aux_array
 	          puts "the player 1 is the winner"
-	          exit
+	          repeat_game
 	        end
 	        if @@winy == aux_array
 	          puts "the player 2 is the winner"
-	          exit
+	          repeat_game
 	        end
 	      end 
 
@@ -34,11 +34,11 @@ class Win < Tictactoe
 	        end 
 	        if @@winx == aux_array
 	          puts "the player 1 is the winner"
-	          exit
+	          repeat_game
 	        end
 	        if @@winy == aux_array
 	          puts "the player 2 is the winner"
-	          exit
+	          repeat_game
 	        end
 	      end 
 
@@ -51,11 +51,11 @@ class Win < Tictactoe
 	      end 
 	      if @@winx == aux_array
 	        puts "the player 1 is the winner"
-	        exit
+	        repeat_game
 	      end
 	      if @@winy == aux_array
 	        puts "the player 2 is the winner"
-	        exit
+	        repeat_game
 	      end
 	      
 	      for i in 0..@@board_size-1
@@ -67,11 +67,11 @@ class Win < Tictactoe
 	      end 
 	      if @@winx == aux_array
 	        puts "the player 1 is the winner"
-	        exit
+	        repeat_game
 	      end
 	      if @@winy == aux_array
-	        puts "the player 2 is the winner"
-	        exit
+	        puts "the player 2 is the winner "
+	        repeat_game
 	      end
     end
 end
