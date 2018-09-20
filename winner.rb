@@ -1,5 +1,4 @@
 require_relative 'tictactoe'
-
 class Win < Tictactoe
 	@@winx = Array.new 
 	@@winy = Array.new 
