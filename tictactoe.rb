@@ -1,28 +1,36 @@
-class Tictactoe
-  
-  def coordinates_empty
-    value = true
-    x = @coorx.to_i
-    y = @coory.to_i
-    if @@board[x][y]  != " "
-      puts "Warning::This place is occupied"
-      value = false
-    end 
-   value 
-  end
+#require_relative 'valid'
 
+class Tictactoe
+  attr_accessor :board
+
+  def initialize
+    self.board = []
+  end
+  
+  # def coordinates_empty
+  #   value = true
+  #   x = @coorx.to_i
+  #   y = @coory.to_i
+  #   if @@board[x][y]  != " "
+  #     puts "Warning::This place is occupied"
+  #     value = false
+  #   end 
+  #  value 
+  # end
+ 
   def coordinates_valid
     value = true
     x = @coorx.to_i
     y = @coory.to_i
+    
      begin  
-       @@board[x][y]
+       board[x][y]
        rescue  
         puts 'Warning::Error in the coordinates write others'  
         value = false 
      end  
      if (value == true)
-      value = coordinates_empty
+      value = Valid.new.coordinates_empty(x,y)
      end 
     value
   end
@@ -51,7 +59,7 @@ class Tictactoe
         player = "O"
         turn(player)
         player2 = Win.new
-        player2.check_win
+        player2.check_win(board)
       else
         loop do 
           puts "player 1"
@@ -60,13 +68,13 @@ class Tictactoe
           @coorx = gets.chomp #var that save the coordinate that user choice
           puts "Y : "
           @coory = gets.chomp
-          value =  coordinates_valid
+          value = coordinates_valid
           break if value == true 
         end  
         player = "X"
         turn(player)
         player1 = Win.new
-        player1.check_win
+        player1.check_win(board)
        end  
     end
     if i == plays  
@@ -77,20 +85,20 @@ class Tictactoe
   def turn (player)
     x = @coorx.to_i
     y = @coory.to_i
-     @@board[x][y] = player
+     board[x][y] = player
      system 'clear' 
      print_board
   end
 
   def  empty_board
-    @@board = []
+  
     # llenar tablero
     @@board_size.times do
       column = []
       @@board_size.times do
         column.push(' ')
       end
-      @@board.push(column)
+      board.push(column)
     end
   end
 
@@ -103,7 +111,7 @@ class Tictactoe
     puts
     i = 0 
     # imprimir matriz
-    @@board.each do |column|
+    board.each do |column|
       coord = i.to_s
       print coord + " "
       i= i+1

@@ -1,4 +1,5 @@
 require_relative 'tictactoe'
+
 class Win < Tictactoe
 	@@winx = Array.new 
 	@@winy = Array.new 
@@ -9,12 +10,12 @@ class Win < Tictactoe
     end 
   end
 
-  def check_win
+  def check_win(board)
 		combo_win
 		aux_array = Array.new
     for i in 0..@@board_size-1
       for j in 0..@@board_size-1
-        aux_array[j] = @@board[i][j] 
+        aux_array[j] = board[i][j] 
       end 
       if @@winx == aux_array
         puts "the player 1 is the winner"
@@ -27,7 +28,7 @@ class Win < Tictactoe
     end 
     for i in 0..@@board_size-1
       for j in 0..@@board_size-1
-        aux_array[j] = @@board[j][i] 
+        aux_array[j] = board[j][i] 
       end 
       if @@winx == aux_array
         puts "the player 1 is the winner"
@@ -41,7 +42,7 @@ class Win < Tictactoe
     for i in 0..@@board_size-1
       for j in 0..@@board_size-1
         if(i == j)
-         aux_array[j] = @@board[j][i] 
+         aux_array[j] = board[j][i] 
         end 
       end 
     end 
@@ -56,7 +57,7 @@ class Win < Tictactoe
     for i in 0..@@board_size-1
       for j in 0..@@board_size-1
         if(i + j == @@board_size-1)
-         aux_array[j] = @@board[j][i] 
+         aux_array[j] = board[j][i] 
         end 
       end 
     end 
