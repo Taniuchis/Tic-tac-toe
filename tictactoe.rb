@@ -1,40 +1,14 @@
-#require_relative 'valid'
 
 class Tictactoe
   attr_accessor :board
-
+  attr_accessor :coorx
+  attr_accessor :coory
   def initialize
     self.board = []
+    self.coorx = 0
+    self.coory = 0
   end
   
-  # def coordinates_empty
-  #   value = true
-  #   x = @coorx.to_i
-  #   y = @coory.to_i
-  #   if @@board[x][y]  != " "
-  #     puts "Warning::This place is occupied"
-  #     value = false
-  #   end 
-  #  value 
-  # end
- 
-  def coordinates_valid
-    value = true
-    x = @coorx.to_i
-    y = @coory.to_i
-    
-     begin  
-       board[x][y]
-       rescue  
-        puts 'Warning::Error in the coordinates write others'  
-        value = false 
-     end  
-     if (value == true)
-      value = Valid.new.coordinates_empty(x,y)
-     end 
-    value
-  end
-
   def size_valid
     if @@board_size == 0 
       puts "Warning::Chooise other size"
@@ -53,7 +27,7 @@ class Tictactoe
           @coorx = gets.chomp #var that save the coordinate that user choice
           puts "Y : "
           @coory = gets.chomp
-          value =  coordinates_valid
+          value =  Valid.new.coordinates_valid(coorx, coory, board)
           break if value == true 
         end
         player = "O"
@@ -68,7 +42,7 @@ class Tictactoe
           @coorx = gets.chomp #var that save the coordinate that user choice
           puts "Y : "
           @coory = gets.chomp
-          value = coordinates_valid
+          value = Valid.new.coordinates_valid(coorx,coory, board)
           break if value == true 
         end  
         player = "X"
@@ -83,8 +57,8 @@ class Tictactoe
   end
 
   def turn (player)
-    x = @coorx.to_i
-    y = @coory.to_i
+    x = coorx.to_i
+    y = coory.to_i
      board[x][y] = player
      system 'clear' 
      print_board

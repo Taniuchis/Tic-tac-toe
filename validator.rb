@@ -2,7 +2,7 @@ require_relative 'tictactoe'
 
 class Valid < Tictactoe
  
-	def coordinates_empty(x,y)
+	def coordinates_empty(x,y,board)
      value = true
     x = x.to_i
     y = y.to_i
@@ -11,6 +11,23 @@ class Valid < Tictactoe
       value = false
     end 
    value 
+  end
+
+  def coordinates_valid(coorx,coory,board)
+    value = true
+    x = coorx.to_i
+    y = coory.to_i
+    
+     begin  
+       board[x][y]
+       rescue  
+        puts 'Warning::Error in the coordinates write others'  
+        value = false 
+     end  
+     if (value == true)
+      value = Valid.new.coordinates_empty(x,y,board)
+     end 
+    value
   end
 end
 
