@@ -3,20 +3,19 @@ class Tictactoe
   attr_accessor :board
   attr_accessor :coorx
   attr_accessor :coory
+  attr_accessor :board_size
   def initialize
     self.board = []
     self.coorx = 0
     self.coory = 0
+    self.board_size = 0
   end
   
-  def size_valid
-    if @@board_size == 0 
-      puts "Warning::Chooise other size"
-    end 
-  end
+  
 
   def player
-    plays = @@board_size * @@board_size
+    puts board_size
+    plays = board_size * board_size
     plays.times do |i|
       i += 1
       if i % 2 == 0 
@@ -33,7 +32,7 @@ class Tictactoe
         player = "O"
         turn(player)
         player2 = Win.new
-        player2.check_win(board)
+        player2.check_win(board, board_size)
       else
         loop do 
           puts "player 1"
@@ -48,7 +47,7 @@ class Tictactoe
         player = "X"
         turn(player)
         player1 = Win.new
-        player1.check_win(board)
+        player1.check_win(board,board_size)
        end  
     end
     if i == plays  
@@ -67,9 +66,9 @@ class Tictactoe
   def  empty_board
   
     # llenar tablero
-    @@board_size.times do
+    board_size.times do
       column = []
-      @@board_size.times do
+      board_size.times do
         column.push(' ')
       end
       board.push(column)
@@ -77,7 +76,7 @@ class Tictactoe
   end
 
   def print_board
-    for i in 0..@@board_size-1
+    for i in 0..board_size-1
       coord = i
       coord = coord.to_s
       print "  " + coord
@@ -95,7 +94,6 @@ class Tictactoe
         print '  ' # print no imprime un salto de linea al final del output
       end
       puts
-      #puts "  --|--|--"
     end
   end
   
@@ -115,9 +113,9 @@ class Tictactoe
     puts "Tic Tac Toe game"
     loop do 
       puts "Choice the size of the board"
-      @@board_size = gets.chomp.to_i
-      size_valid
-      break if @@board_size > 0
+      @board_size = gets.chomp.to_i
+      Valid.new.size_valid(board_size)
+      break if board_size > 0
     end 
     empty_board
     #check_win

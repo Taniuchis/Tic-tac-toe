@@ -1,6 +1,12 @@
 require_relative 'tictactoe'
 
 class Valid < Tictactoe
+
+	def size_valid(board_size)
+    if board_size == 0 
+      puts "Warning::Chooise other size"
+    end 
+  end
  
 	def coordinates_empty(x,y,board)
      value = true
