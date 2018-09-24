@@ -11,8 +11,6 @@ class Tictactoe
     self.board_size = 0
   end
   
-  
-
   def player
     puts board_size
     plays = board_size * board_size
