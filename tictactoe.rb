@@ -1,40 +1,19 @@
+
 class Tictactoe
+  attr_accessor :board
+  attr_accessor :coorx
+  attr_accessor :coory
+  attr_accessor :board_size
+  def initialize
+    self.board = []
+    self.coorx = 0
+    self.coory = 0
+    self.board_size = 0
+  end
   
-  def coordinates_empty
-    value = true
-    x = @coorx.to_i
-    y = @coory.to_i
-    if @@board[x][y]  != " "
-      puts "Warning::This place is occupied"
-      value = false
-    end 
-   value 
-  end
-
-  def coordinates_valid
-    value = true
-    x = @coorx.to_i
-    y = @coory.to_i
-     begin  
-       @@board[x][y]
-       rescue  
-        puts 'Warning::Error in the coordinates write others'  
-        value = false 
-     end  
-     if (value == true)
-      value = coordinates_empty
-     end 
-    value
-  end
-
-  def size_valid
-    if @@board_size == 0 
-      puts "Warning::Chooise other size"
-    end 
-  end
-
   def player
-    plays = @@board_size * @@board_size
+    puts board_size
+    plays = board_size * board_size
     plays.times do |i|
       i += 1
       if i % 2 == 0 
@@ -45,13 +24,13 @@ class Tictactoe
           @coorx = gets.chomp #var that save the coordinate that user choice
           puts "Y : "
           @coory = gets.chomp
-          value =  coordinates_valid
+          value =  Valid.new.coordinates_valid(coorx, coory, board)
           break if value == true 
         end
         player = "O"
         turn(player)
         player2 = Win.new
-        player2.check_win
+        player2.check_win(board, board_size)
       else
         loop do 
           puts "player 1"
@@ -60,13 +39,13 @@ class Tictactoe
           @coorx = gets.chomp #var that save the coordinate that user choice
           puts "Y : "
           @coory = gets.chomp
-          value =  coordinates_valid
+          value = Valid.new.coordinates_valid(coorx,coory, board)
           break if value == true 
         end  
         player = "X"
         turn(player)
         player1 = Win.new
-        player1.check_win
+        player1.check_win(board,board_size)
        end  
     end
     if i == plays  
@@ -75,27 +54,27 @@ class Tictactoe
   end
 
   def turn (player)
-    x = @coorx.to_i
-    y = @coory.to_i
-     @@board[x][y] = player
+    x = coorx.to_i
+    y = coory.to_i
+     board[x][y] = player
      system 'clear' 
      print_board
   end
 
   def  empty_board
-    @@board = []
+  
     # llenar tablero
-    @@board_size.times do
+    board_size.times do
       column = []
-      @@board_size.times do
+      board_size.times do
         column.push(' ')
       end
-      @@board.push(column)
+      board.push(column)
     end
   end
 
   def print_board
-    for i in 0..@@board_size-1
+    for i in 0..board_size-1
       coord = i
       coord = coord.to_s
       print "  " + coord
@@ -103,7 +82,7 @@ class Tictactoe
     puts
     i = 0 
     # imprimir matriz
-    @@board.each do |column|
+    board.each do |column|
       coord = i.to_s
       print coord + " "
       i= i+1
@@ -113,7 +92,6 @@ class Tictactoe
         print '  ' # print no imprime un salto de linea al final del output
       end
       puts
-      #puts "  --|--|--"
     end
   end
   
@@ -133,9 +111,9 @@ class Tictactoe
     puts "Tic Tac Toe game"
     loop do 
       puts "Choice the size of the board"
-      @@board_size = gets.chomp.to_i
-      size_valid
-      break if @@board_size > 0
+      @board_size = gets.chomp.to_i
+      Valid.new.size_valid(board_size)
+      break if board_size > 0
     end 
     empty_board
     #check_win
